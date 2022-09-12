@@ -1,0 +1,48 @@
+﻿@model Acompanhamento_Web.Models.Acompanhamento
+
+@{
+    ViewData["Title"] = "Enviar email";
+}
+<h1>Enviar E-mail Notificação</h1>
+
+<h4>Novo E-mail</h4>
+<hr />
+<div class="row">    
+    <form asp-action="EnviaEmail">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="ID" />
+        <dl>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.CNPJ)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.CNPJ)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.VALIDADE)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.VALIDADE)
+            </dd>
+        </dl>
+        @using (Html.BeginForm("EnviaEmail", "Acompanhamento", FormMethod.Post))
+        {
+            <p>
+                Razão Social : @Html.TextBox("txtRazao", Model.RAZAO, new { @class = "form-control" })
+            </p>
+            <p>
+                Email 1 : @Html.TextBox("txtEmail", Model.EMAIL1, new { @class = "form-control" })
+            </p>
+            <p>
+                Email 2 : @Html.TextBox("txtEmail2", Model.EMAIL2, new { @class = "form-control" })
+            </p>
+            <p>
+                <button class="btn btn-success">Enviar</button> |
+                <a asp-action="Index" class="btn btn-outline-primary">Voltar para Lista</a>
+            </p>
+        }            
+    </form>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

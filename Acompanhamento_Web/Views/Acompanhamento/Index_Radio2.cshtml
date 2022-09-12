@@ -1,0 +1,157 @@
+﻿@model PagedList.IPagedList<Acompanhamento_Web.Models.Acompanhamento>
+@using PagedList.Mvc;
+
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+@{
+    ViewData["Title"] = "Lista de À Vencer";
+}
+
+<h1>Lista de À Vencer</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Criar Novo</a>
+</p>
+<div>
+    Página @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+    De @Model.PageCount
+
+    @if (Model.HasPreviousPage)
+    {
+        @Html.ActionLink("<<", "Index_Radio2", new { page = 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw(" ");
+        @Html.ActionLink("< Anterior", "Index_Radio2", new { page = Model.PageNumber - 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:<<
+        @Html.Raw(" ");
+        @:< Anterior
+    }
+
+    @if (Model.HasNextPage)
+    {
+        @Html.ActionLink("Próxima >", "Index_Radio2", new { page = Model.PageNumber + 1, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+        @Html.Raw(" ");
+        @Html.ActionLink(">>", "Index_Radio2", new { page = Model.PageCount, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter })
+    }
+    else
+    {
+        @:Próxima >
+        @Html.Raw(" ")
+        @:>>
+    }
+</div>
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayName("CNPJ")
+                </th>
+                <th>
+                    @Html.ActionLink("Razão Social", "Index_Radio2", new { sortOrder = ViewBag.Razao })
+                </th>
+                <th>
+                    @Html.ActionLink("Validade", "Index_Radio2", new { sortOrder = ViewBag.Validade })
+                </th>
+                <th>
+                    @Html.ActionLink("Dias P/ Vencer", "Index_Radio2", new { sortOrder = ViewBag.Dias })
+                </th>
+                <th>
+                    @Html.ActionLink("Notificação", "Index_Radio2", new { sortOrder = ViewBag.Notificacao })
+                </th>
+                <th>
+                    @Html.DisplayName("Dias P/ Notificar")
+                </th>                
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                DateTime inicio = item.VALIDADE;
+                DateTime inicio_notify = item.NOTIFICACAO;
+                DateTime fim = DateTime.Now.Date;
+
+                TimeSpan result = inicio.Subtract(fim);
+                TimeSpan result_notify = inicio_notify - fim;
+
+                double Dias = result.TotalDays;
+                double Dias_notify = result_notify.TotalDays;
+
+                if (Dias <= 15)
+                {
+                    <tr class="table-danger">                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CNPJ)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RAZAO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VALIDADE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Dias)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NOTIFICACAO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Dias_notify)
+                        </td>
+                        <td>
+                            <a asp-action="Email" asp-route-id="@item.ID" class="btn btn-outline-primary">Enviar Email</a>
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-outline-success">Detalhes</a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-outline-danger">Excluír</a>
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-outline-info">Editar</a>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="table-success">                        
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CNPJ)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RAZAO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VALIDADE)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Dias)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.NOTIFICACAO)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => Dias_notify)
+                        </td>
+                        <td>
+                            <a asp-action="Email" asp-route-id="@item.ID" class="btn btn-outline-primary">Enviar Email</a>
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.ID" class="btn btn-outline-success">Detalhes</a>
+                        </td>
+                        <td>
+                            <a asp-action="Delete" asp-route-id="@item.ID" class="btn btn-outline-danger">Excluír</a>
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ID" class="btn btn-outline-info">Editar</a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div> 
+    

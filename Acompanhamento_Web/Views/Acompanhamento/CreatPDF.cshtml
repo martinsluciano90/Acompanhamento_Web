@@ -1,0 +1,68 @@
+﻿@model Acompanhamento_Web.Models.Acompanhamento
+
+@{
+    ViewData["Title"] = "Detalhes PDF";
+}
+
+<h1>Detalhes</h1>
+
+<div>
+    <h4>Acompanhamento</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CNPJ)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CNPJ)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RAZAO)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RAZAO)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VALIDADE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VALIDADE)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DIAS)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DIAS)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.NOTIFICACAO)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NOTIFICACAO)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.AVISADO)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.AVISADO)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ANOTACAO)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ANOTACAO)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EMAIL1)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EMAIL1)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EMAIL2)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EMAIL2)
+        </dd>
+    </dl>
+</div>
