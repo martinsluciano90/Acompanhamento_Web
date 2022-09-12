@@ -510,16 +510,12 @@ namespace Acompanhamento_Web.Controllers
                 // Estancia da Classe de Mensagem
                 MailMessage _mailMessage = new MailMessage();
                 // Remetente
-                _mailMessage.From = new MailAddress("yago@redefarmes.com.br");
+                _mailMessage.From = new MailAddress("martinsluciano90@outlook.com");
 
                 // Destinatario seta no metodo abaixo
 
                 //Contrói o MailMessage
-                _mailMessage.CC.Add(email);
-                _mailMessage.CC.Add("jefferson@redefarmes.com.br");
-                _mailMessage.CC.Add("suporte@redefarmes.com.br");
-                _mailMessage.CC.Add("luciano@redefarmes.com.br");
-                _mailMessage.CC.Add("yago@redefarmes.com.br");
+                _mailMessage.CC.Add(email);                
                 _mailMessage.To.Add(email2);
                 _mailMessage.Subject = "Vencimento de Certificado Digital";
                 _mailMessage.IsBodyHtml = true;
@@ -539,14 +535,14 @@ namespace Acompanhamento_Web.Controllers
                 _mailMessage.Priority = MailPriority.High;
 
                 //CONFIGURAÇÃO COM PORTA
-                SmtpClient _smtpClient = new SmtpClient("smtp.office365.com", Convert.ToInt32("587"));
+                SmtpClient _smtpClient = new SmtpClient("smtp-mail.outlook.com", Convert.ToInt32("587"));
 
                 //CONFIGURAÇÃO SEM PORTA
                 // SmtpClient _smtpClient = new SmtpClient(UtilRsource.ConfigSmtp);
 
                 // Credencial para envio por SMTP Seguro (Quando o servidor exige autenticação)
                 _smtpClient.UseDefaultCredentials = false;
-                _smtpClient.Credentials = new NetworkCredential("yago@redefarmes.com.br", "Pam42856");
+                _smtpClient.Credentials = new NetworkCredential("martinsluciano90@outlook.com", "78945278LuLu");
 
                 _smtpClient.EnableSsl = true;
 
